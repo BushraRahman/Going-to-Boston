@@ -2,7 +2,7 @@ let rounds;
 document.querySelector(".start_submit").addEventListener("click", function(){
 	rounds = document.querySelector(".textInput").value;
 	document.querySelector(".textInput").disabled = true;
-	document.querySelector(".submit").disabled = true;
+	document.querySelector(".start_submit").disabled = true;
 	firstPlayer()
 	/* do later: error if rounds is not an odd number*/
 })
@@ -12,10 +12,16 @@ let rollDie = () => {
 }
 
 let firstPlayer = () => {
-	var firstPlayerList = document.getElementsByClassName("firstPlayer").classList
-	for (let i = 0; i < firstPlayerList.length; i++){
-		firstPlayerList[i].classList.remove("hidden")
-	}
+	let first;
+	let second;
+    document.querySelector(".firstPlayer").classList.remove("hidden");
+    document.querySelector(".rollDie").addEventListener("click", function(){
+    	first = rollDie()
+    	second = rollDie()
+})
+    document.querySelector(".firstPlayer").appendChild+="????"
+console.log(first)
+console.log(second)
 }
 
 document.querySelector(".start_submit").addEventListener("click", function() {
