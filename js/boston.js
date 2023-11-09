@@ -1,5 +1,5 @@
 let rounds;
-document.querySelector(".submit").addEventListener("click", function(){
+document.querySelector(".start_submit").addEventListener("click", function(){
 	rounds = document.querySelector(".textInput").value;
 	document.querySelector(".textInput").disabled = true;
 	document.querySelector(".submit").disabled = true;
@@ -10,3 +10,7 @@ document.querySelector(".submit").addEventListener("click", function(){
 let rollDie = () => {
 	console.log(Math.floor(Math.random() * 6)+1)
 }
+
+document.querySelector(".start_submit").addEventListener("click", function() {
+    document.querySelector(".start_page").classList.add("hidden");
+});
