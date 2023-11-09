@@ -1,5 +1,5 @@
 let rounds;
-document.querySelector(".submit").addEventListener("click", function(){
+document.querySelector(".start_submit").addEventListener("click", function(){
 	rounds = document.querySelector(".textInput").value;
 	document.querySelector(".textInput").disabled = true;
 	document.querySelector(".submit").disabled = true;
@@ -17,3 +17,7 @@ let firstPlayer = () => {
 		firstPlayerList[i].classList.remove("hidden")
 	}
 }
+
+document.querySelector(".start_submit").addEventListener("click", function() {
+    document.querySelector(".start_page").classList.add("hidden");
+});
