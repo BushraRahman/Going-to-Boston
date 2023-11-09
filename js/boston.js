@@ -12,5 +12,13 @@ let rollDie = () => {
 }
 
 document.querySelector(".start_submit").addEventListener("click", function() {
-    document.querySelector(".start_page").classList.add("hidden");
+    if (document.getElementById('round_num').value % 2 == 1) {
+        document.querySelector(".start_page").classList.add("hidden");
+        document.querySelector(".not_odd").classList.add("hidden");
+    } else {
+        document.querySelector(".not_odd").classList.remove("hidden");
+        document.getElementById("round_num").disabled = false;
+        document.querySelector(".textInput").value = "";
+    }
+        
 });
