@@ -9,11 +9,37 @@
 </head>
 
 <body>
-  <p class="start_page">How many rounds would you like to play?<br>
+  <p class="start_page">
+    How many rounds would you like to play? <br>
     (Odd #s only!)<br><br>
-    <input type="number" id="round_num" class="textInput"><br>
+    <input type="number" id="round_num" class="textInput"><br><br>
     <button class="start_submit">Start the Game</button>
-    <p class="not_odd hidden">Your input value must be odd</p>
+    <span class="not_odd hidden">Your input value must be valid</span>
+  </p>
+
+  <p class="roll_for_first hidden">
+    Roll the dice by clicking the button below.<br>
+    The player with the higher number goes first.<br><br>
+    <span class="one_dice"> Player 1: N/A</span> <br>
+    <span class="two_dice"> Player 2: N/A</span> <br><br>
+    <span class="first_player"> The player to go first is... </span><br><br>
+    <button class="first_dice">Roll Dice</button>
+    <button class="play hidden">Play</button>
+  </p>
+
+  <p class="game_play hidden">
+    <span class="round">Round 1</span><br><br>
+    <span class="one_score">Player One Score: 0</span><br>
+    <span class="one_rounds">Player One Rounds Won: 0</span><br><br>
+    <span class="two_score">Player Two Score: 0</span><br>
+    <span class="two_rounds">Player Two Rounds Won: 0</span><br><br>
+    <span class="current_player">Current Player: N/A</span><br><br>
+    <span class="dice_nums">Roll Results: N/A</span><br><br>
+    <button class="first_roll">First Roll</button>
+    <button class="second_roll hidden">Second Roll</button>
+    <button class="last_roll hidden">Last Roll</button>
+    <button class="end_turn hidden">End Turn</button>
+    <button class="end_round hidden">End Round</button>
   </p>
   <p class="firstPlayer hidden">Roll die to decide who goes first
     <button class="rollDie">Roll Die</button><br>
