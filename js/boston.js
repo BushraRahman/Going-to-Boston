@@ -1,4 +1,4 @@
-let total_rounds, current_player, current_round;
+let current_player, total_rounds;
 let one_score = one_rounds = two_score = two_rounds = 0;
 
 let rollDie = () => {
@@ -117,7 +117,7 @@ function end_turn() {
 }
 
 // round loop
-for (current_round = 0; current_round < total_rounds; current_round++) {
+for (current_round = 1; current_round <= total_rounds; current_round++) {
     console.log("while loop");
     player_turn();
     end_turn();
@@ -125,9 +125,9 @@ for (current_round = 0; current_round < total_rounds; current_round++) {
     document.querySelector(".end_round").classList.remove("hidden");
     document.querySelector(".end_round").addEventListener("click", function() {
         if (one_score > two_score) {
-            one_round++;
+            one_rounds++;
         } else if (one_score < two_score) {
-            two_round++;
+            two_rounds++;
         }
     })
     document.querySelector(".round").textContent = `Round ${current_round}`;
@@ -135,8 +135,8 @@ for (current_round = 0; current_round < total_rounds; current_round++) {
 }
 
 // winner page
-if (current_round == total_rounds) {
-    if (one_round > two_round) {
+if (current_round == total_rounds + 1) {
+    if (one_rounds > two_rounds) {
         winner = 1;
     } else {
         winner = 2;
