@@ -1,4 +1,5 @@
-let rounds;
+let total_rounds;
+let current_round = 1;
 
 let rollDie = () => {
 	return Math.floor(Math.random() * 6)+1;
@@ -6,7 +7,7 @@ let rollDie = () => {
 
 document.querySelector(".start_submit").addEventListener("click", function() {
     if (document.getElementById('round_num').value % 2 == 1) {
-        rounds = document.getElementById('round_num').value;
+        total_rounds = document.getElementById('round_num').value;
         document.querySelector(".start_page").classList.add("hidden");
         document.querySelector(".not_odd").classList.add("hidden");
         document.querySelector(".roll_for_first").classList.remove("hidden");
@@ -25,11 +26,12 @@ document.querySelector(".first_dice").addEventListener("click", function() {
     if (player_one > player_two) {
         document.querySelector(".first_player").textContent = "Player 1 goes first!"
         document.querySelector(".first_dice").classList.add("hidden");
+        document.querySelector(".play").classList.remove("hidden");
     } else if (player_one == player_two) {
         document.querySelector(".first_player").textContent = "Tie! Roll again."
     } else {
         document.querySelector(".first_player").textContent = "Player 2 goes first!"
         document.querySelector(".first_dice").classList.add("hidden");
+        document.querySelector(".play").classList.remove("hidden");
     }
-
-})
+});
