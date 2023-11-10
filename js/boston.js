@@ -93,18 +93,21 @@ document.querySelector(".last_roll").addEventListener("click", function() {
         document.querySelector(".two_score").textContent = `Player Two Score: ${two_score}`;
     }
     document.querySelector(".last_roll").classList.add("hidden");
+    document.querySelector(".end_turn").classList.remove("hidden");
     document.querySelector(".dice_nums").textContent = `Roll Results: ${score}`;
-    // end turn button appears
 })
 
 // end turn button
-// document.querySelector(".end_turn").addEventListener("click", function() {
-//     if (current_player == 1) {
-//         current_player = 2;
-//     } else {
-//         current_player = 1;
-//     }
-// })
+document.querySelector(".end_turn").addEventListener("click", function() {
+    if (current_player == 1) {
+        current_player = 2;
+    } else {
+        current_player = 1;
+    }
+    document.querySelector(".current_player").textContent = `Current Player: ${current_player}`
+    document.querySelector(".dice_nums").textContent = `Roll Results: N/A`;
+    document.querySelector(".end_turn").classList.add("hidden");
+})
 
 // second player's first roll
 
