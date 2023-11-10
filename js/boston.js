@@ -49,7 +49,42 @@ document.querySelector(".play").addEventListener("click", function() {
 
 // first player's first roll
 document.querySelector(".first_roll").addEventListener("click", function() {
-    score = first_roll();
+    roll1 = rollDie();
+    roll2 = rollDie();
+    roll3 = rollDie();
+    rolls = [roll1, roll2, roll3];
+    if (current_player == 1) {
+        one_score += Math.max(roll1, roll2, roll3);
+        document.querySelector(".one_score").textContent = `Player One Score: ${one_score}`;
+    } else {
+        two_score += Math.max(roll1, roll2, roll3);
+        document.querySelector(".two_score").textContent = `Player Two Score: ${two_score}`;
+    }
+    document.querySelector(".first_roll").classList.add("hidden");
+    document.querySelector(".second_roll").classList.remove("hidden");
+    document.querySelector(".dice_nums").textContent = `Roll Results: ${rolls}`;
+})
+
+// first player's second roll
+document.querySelector(".second_roll").addEventListener("click", function() {
+    roll1 = rollDie();
+    roll2 = rollDie();
+    rolls = [roll1, roll2];
+    if (current_player == 1) {
+        one_score += Math.max(roll1, roll2);
+        document.querySelector(".one_score").textContent = `Player One Score: ${one_score}`;
+    } else {
+        two_score += Math.max(roll1, roll2);
+        document.querySelector(".two_score").textContent = `Player Two Score: ${two_score}`;
+    }
+    document.querySelector(".second_roll").classList.add("hidden");
+    document.querySelector(".last_roll").classList.remove("hidden");
+    document.querySelector(".dice_nums").textContent = `Roll Results: ${rolls}`;
+})
+
+// first player's last roll
+document.querySelector(".last_roll").addEventListener("click", function() {
+    score = rollDie();
     if (current_player == 1) {
         one_score += score;
         document.querySelector(".one_score").textContent = `Player One Score: ${one_score}`;
@@ -57,21 +92,24 @@ document.querySelector(".first_roll").addEventListener("click", function() {
         two_score += score;
         document.querySelector(".two_score").textContent = `Player Two Score: ${two_score}`;
     }
-    document.querySelector(".first_roll").classList.add("hidden");
-    document.querySelector(".second_roll").classList.remove("hidden");
+    document.querySelector(".last_roll").classList.add("hidden");
+    document.querySelector(".dice_nums").textContent = `Roll Results: ${score}`;
+    // end turn button appears
 })
 
-function first_roll() {
-    roll1 = rollDie();
-    roll2 = rollDie();
-    roll3 = rollDie();
-    score = Math.max(roll1, roll2, roll3);
-    return score;
-}
+// end turn button
+// document.querySelector(".end_turn").addEventListener("click", function() {
+//     if (current_player == 1) {
+//         current_player = 2;
+//     } else {
+//         current_player = 1;
+//     }
+// })
 
-function second_roll() {
-    roll1 = rollDie();
-    roll2 = rollDie();
-    score = Math.max(roll1, roll2);
-    return score;
-}
+// second player's first roll
+
+// second player's second roll
+
+// second player's last roll
+
+// next round
