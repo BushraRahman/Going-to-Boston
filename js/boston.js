@@ -1,4 +1,6 @@
 let rounds;
+let preference;
+const br = document.createElement("br");
 document.querySelector(".start_submit").addEventListener("click", function(){
 	rounds = document.querySelector(".textInput").value;
 	document.querySelector(".textInput").disabled = true;
@@ -9,7 +11,8 @@ document.querySelector(".start_submit").addEventListener("click", function(){
 })
 
 let rollDie = () => {
-	console.log(Math.floor(Math.random() * 6)+1)
+	//return Math.floor(Math.random() * 6)+1
+	return Math.floor(Math.random() * 2)+1
 }
 
 document.querySelector(".start_submit").addEventListener("click", function() {
@@ -25,14 +28,43 @@ document.querySelector(".start_submit").addEventListener("click", function() {
 });
 
 let firstPlayer = () => {
-	let first;
-	let second;
     document.querySelector(".firstPlayer").classList.remove("hidden");
     document.querySelector(".rollDie").addEventListener("click", function(){
-    	first = rollDie()
-    	second = rollDie()
-})
-    document.querySelector(".firstPlayer").appendChild+="????"
-console.log(first)
-console.log(second)
+    	let results = rollFirstDie()
+    	let first = results[0]
+    	let second = results[1]
+    	document.querySelector(".results").classList.remove("hidden");
+    	document.querySelector(".order").classList.remove("hidden")
+    	if(first == second){
+    		document.querySelector(".order").textContent = "The results were the same! Roll again!"
+    	}else{
+    		if (first > second){
+    			document.querySelector(".order").textContent = "Player one got a higher value! Player one will go first!"
+    			preference="first"
+    		}else{
+    			document.querySelector(".order").textContent = "Player two got a higher value! Player two will go first!"
+    			preference="second"
+    		}
+    		document.querySelector(".rollDie").disabled = true;
+    		/*setTimeout(function() {
+  			document.querySelector(".firstPlayer").classList.add("hidden");
+			}, 2000);*/
+			let continueButton = document.querySelector(".continue")
+			continueButton.classList.remove("hidden")
+			continueButton.addEventListener("click", function(){
+				document.querySelector(".firstPlayer").classList.add("hidden");
+			})
+			}
+    	})
+
+    	}
+
+let rollFirstDie = () =>{
+	let first;
+	let second;
+	first = rollDie()
+    second = rollDie()
+    document.querySelector(".firstResult").textContent=first;
+    document.querySelector(".secondResult").textContent=second;
+    return [first, second]
 }
