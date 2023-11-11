@@ -1,4 +1,4 @@
-let current_player, total_rounds;
+let current_player, total_rounds, playing, original_player, current_round;
 let one_score = one_rounds = two_score = two_rounds = 0;
 
 let rollDie = () => {
@@ -29,14 +29,14 @@ document.querySelector(".first_dice").addEventListener("click", function() {
         document.querySelector(".first_player").textContent = "Player 1 goes first!"
         document.querySelector(".first_dice").classList.add("hidden");
         document.querySelector(".play").classList.remove("hidden");
-        current_player = 1;
+        current_player = original_player = 1;
     } else if (player_one == player_two) {
         document.querySelector(".first_player").textContent = "Tie! Roll again."
     } else {
         document.querySelector(".first_player").textContent = "Player 2 goes first!"
         document.querySelector(".first_dice").classList.add("hidden");
         document.querySelector(".play").classList.remove("hidden");
-        current_player = 2;
+        current_player = original_player = 2;
     }
 });
 
@@ -45,12 +45,20 @@ document.querySelector(".play").addEventListener("click", function() {
     document.querySelector(".roll_for_first").classList.add("hidden");
     document.querySelector(".game_play").classList.remove("hidden");
     document.querySelector(".current_player").textContent = `Current Player: ${current_player}`
-    round()
+    console.log(document.querySelector(".game_play").classList)
+    player_turn();
+    current_round = 1;
+    //end_turn();
+    if(!(document.querySelector(".game_play").classList.contains("hidden"))){
+    //round()
+    }
 })
 
 function player_turn() {
     console.log("player turn");
     // first roll
+    playing = true;
+    //while(playing == true){
     document.querySelector(".first_roll").addEventListener("click", function() {
         roll1 = rollDie();
         roll2 = rollDie();
@@ -97,43 +105,69 @@ function player_turn() {
         }
         document.querySelector(".last_roll").classList.add("hidden");
         document.querySelector(".dice_nums").textContent = `Roll Results: ${score}`;
+        end_turn()
     })
 }
+//}
 
 function end_turn() {
     console.log("end turn");
     document.querySelector(".end_turn").classList.remove("hidden");
-    document.querySelector(".end_turn").addEventListener("click", function() {
-        if (current_player == 1) {
+    playing=false;
+    if(playing == false){
+    document.querySelector(".end_turn").addEventListener("click", end_turn_helper())
+}
+}
+
+function end_turn_helper(){
+if (current_player == 1) {
             current_player = 2;
         } else {
             current_player = 1;
         }
+        console.log("...what")
         document.querySelector(".current_player").textContent = `Current Player: ${current_player}`
         document.querySelector(".dice_nums").textContent = `Roll Results: N/A`;
         document.querySelector(".end_turn").classList.add("hidden");
         document.querySelector(".first_roll").classList.remove("hidden");
-        
-    })}
+        if(current_player==original_player){
+            end_round()
+        }
+        //document.querySelector(".end_turn").removeEventListener("click", end_turn_helper())
+}
 
 function round(){
 // round loop
 for (current_round = 1; current_round <= total_rounds; current_round++) {
     console.log("while loop");
+    console.log(document.querySelector(".game_play").classList)
     player_turn();
     /*end_turn();
-    player_turn();
+    player_turn();*/
+}
+}
+
+function end_round(){
+    console.log("help!!")
     document.querySelector(".end_round").classList.remove("hidden");
     document.querySelector(".end_round").addEventListener("click", function() {
+        console.log(one_score)
         if (one_score > two_score) {
             one_rounds++;
+            document.querySelector(".one_rounds").textContent = `Player One Rounds Won: ${one_rounds}`
         } else if (one_score < two_score) {
             two_rounds++;
+            document.querySelector(".two_rounds").textContent = `Player Two Rounds Won: ${two_rounds}`
         }
-    })
+        current_round++;
+        one_score = two_score = 0;
     document.querySelector(".round").textContent = `Round ${current_round}`;
-    document.querySelector(".end_round").classList.add("hidden");*/
-}
+    document.querySelector(".end_round").classList.add("hidden");
+    document.querySelector(".one_score").textContent = `Player One Score: ${one_score}`;
+    document.querySelector(".two_score").textContent = `Player Two Score: ${two_score}`;
+
+    }, {once : true}
+    )
 }
 // winner page
 /*if (current_round == total_rounds) {
