@@ -165,20 +165,21 @@ function end_round(){
     document.querySelector(".end_round").classList.add("hidden");
     document.querySelector(".one_score").textContent = `Player One Score: ${one_score}`;
     document.querySelector(".two_score").textContent = `Player Two Score: ${two_score}`;
-
+    end()
     }, {once : true}
     )
 }
+
+function end(){
 // winner page
-/*if (current_round == total_rounds) {
-    if (one_round > two_round) {
-=======
-if (current_round == total_rounds + 1) {
+if (current_round > total_rounds) {
     if (one_rounds > two_rounds) {
->>>>>>> refs/remotes/origin/main
         winner = 1;
     } else {
         winner = 2;
     }
+    document.querySelector(".game_play").classList.add("hidden");
+    document.querySelector(".winner").classList.remove("hidden");
     document.querySelector(".winner").textContent = `The winner is... Player ${winner}!!!`
-}*/
+}
+}
