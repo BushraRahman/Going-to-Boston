@@ -1,5 +1,5 @@
-let current_player, total_rounds, playing, original_player, current_round;
-let one_score = one_rounds = two_score = two_rounds = 0;
+let current_player, total_rounds, playing, original_player;
+let current_round = one_score = one_rounds = two_score = two_rounds = 0;
 
 let rollDie = () => {
 	return Math.floor(Math.random() * 6)+1;
@@ -8,10 +8,12 @@ let rollDie = () => {
 // decide how many rounds to play
 document.querySelector(".start_submit").addEventListener("click", function() {
     if (document.getElementById('round_num').value % 2 == 1) {
+        console.log("start")
         total_rounds = parseInt(document.getElementById('round_num').value);
         document.querySelector(".start_page").classList.add("hidden");
         document.querySelector(".not_odd").classList.add("hidden");
         document.querySelector(".roll_for_first").classList.remove("hidden");
+        document.querySelector(".restart").classList.remove("hidden");
     } else {
         document.querySelector(".not_odd").classList.remove("hidden");
         document.getElementById("round_num").disabled = false;
@@ -19,8 +21,35 @@ document.querySelector(".start_submit").addEventListener("click", function() {
     }   
 });
 
+// restarting the game 
+document.querySelector(".restart").addEventListener("click",function(){
+    document.querySelector(".roll_for_first").classList.add("hidden");
+    document.querySelector(".game_play").classList.add("hidden");
+    document.querySelector(".winner").classList.add("hidden");``
+    document.querySelector(".restart").classList.add("hidden");
+    document.querySelector(".start_page").classList.remove("hidden");
+    document.querySelector(".first_dice").classList.remove("hidden");
+    document.querySelector(".play").classList.add("hidden");
+    current_player = total_rounds = playing = original_player = null;
+    current_round = one_score = one_rounds = two_score = two_rounds = 0;
+    document.querySelector(".first_dice").addEventListener("click", first_dice);
+    for (child of document.querySelector(".game_play").getElementsByTagName('button')){
+        if (!child.classList.contains("first_roll") && !child.classList.contains("hidden")){
+            child.classList.add("hidden")
+        }
+    }
+    document.querySelector(".one_dice").textContent = "Player 1: N/A"
+    document.querySelector(".two_dice").textContent = "Player 2: N/A"
+    document.querySelector(".first_player").textContent = "The player to go first is..."
+    document.querySelector(".current_player").textContent = "Current Player: N/A"
+    document.querySelector(".dice_nums").textContent = "Roll Results: N/A"
+})
+
+document.querySelector(".first_dice").addEventListener("click", first_dice);
+
 // decide who goes first
-document.querySelector(".first_dice").addEventListener("click", function() {
+function first_dice() {
+    console.log("...run")
     player_one = rollDie();
     document.querySelector(".one_dice").textContent = `Player 1: ${player_one}`;
     player_two = rollDie();
@@ -30,6 +59,7 @@ document.querySelector(".first_dice").addEventListener("click", function() {
         document.querySelector(".first_dice").classList.add("hidden");
         document.querySelector(".play").classList.remove("hidden");
         current_player = original_player = 1;
+        console.log("current player is 1")
     } else if (player_one == player_two) {
         document.querySelector(".first_player").textContent = "Tie! Roll again."
     } else {
@@ -37,21 +67,25 @@ document.querySelector(".first_dice").addEventListener("click", function() {
         document.querySelector(".first_dice").classList.add("hidden");
         document.querySelector(".play").classList.remove("hidden");
         current_player = original_player = 2;
+        console.log("current player is two")
     }
-});
+}
 
 // shows who goes first + play button to transition into player turn
 document.querySelector(".play").addEventListener("click", function() {
     document.querySelector(".roll_for_first").classList.add("hidden");
     document.querySelector(".game_play").classList.remove("hidden");
+    document.querySelector(".round").textContent = `Player One Score: ${current_round}`
+    document.querySelector(".one_score").textContent = `Player One Score: ${one_score}`
+    document.querySelector(".one_rounds").textContent = `Player One Rounds Won: ${one_rounds}`
+    document.querySelector(".two_score").textContent = `Player Two Score: ${two_score}`
+    document.querySelector(".two_rounds").textContent = `Player Two Rounds Won: ${two_rounds}`
     document.querySelector(".current_player").textContent = `Current Player: ${current_player}`
     console.log(document.querySelector(".game_play").classList)
     player_turn();
     current_round = 1;
     //end_turn();
-    if(!(document.querySelector(".game_play").classList.contains("hidden"))){
-    //round()
-    }
+    document.querySelector(".total_rounds").textContent = `Total Rounds: ${total_rounds}`;
 })
 
 function first_roll(){
@@ -200,7 +234,4 @@ function end(){
         document.querySelector(".winner").classList.remove("hidden");
         document.querySelector(".winner").textContent = `The winner is... Player ${winner}!!!`
     })
-/*}else{
-    player_turn()
-}*/
 }
