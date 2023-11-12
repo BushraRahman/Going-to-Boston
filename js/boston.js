@@ -30,7 +30,7 @@ document.querySelector(".restart").addEventListener("click",function(){
     document.querySelector(".first_dice").classList.remove("hidden");
     document.querySelector(".play").classList.add("hidden");
     current_player = total_rounds = playing = original_player = null;
-    current_round = one_score = one_rounds = two_score = two_rounds = 0;
+    one_score = one_rounds = two_score = two_rounds = 0;
     document.querySelector(".first_dice").addEventListener("click", first_dice);
     for (child of document.querySelector(".game_play").getElementsByTagName('button')){
         if (!child.classList.contains("first_roll") && !child.classList.contains("hidden")){
@@ -69,16 +69,16 @@ function first_dice() {
 
 // shows who goes first + play button to transition into player turn
 document.querySelector(".play").addEventListener("click", function() {
+    current_round = 1;
     document.querySelector(".roll_for_first").classList.add("hidden");
     document.querySelector(".game_play").classList.remove("hidden");
-    document.querySelector(".round").textContent = `Player One Score: ${current_round}`
+    document.querySelector(".round").textContent = `Current Round: ${current_round}`
     document.querySelector(".one_score").textContent = `Player One Score: ${one_score}`
     document.querySelector(".one_rounds").textContent = `Player One Rounds Won: ${one_rounds}`
     document.querySelector(".two_score").textContent = `Player Two Score: ${two_score}`
     document.querySelector(".two_rounds").textContent = `Player Two Rounds Won: ${two_rounds}`
     document.querySelector(".current_player").textContent = `Current Player: ${current_player}`
     player_turn();
-    current_round = 1;
     document.querySelector(".total_rounds").textContent = `Total Rounds: ${total_rounds}`;
 })
 
@@ -188,15 +188,19 @@ function end_round(){
 }
 
 function end(){
-    if (one_rounds > two_rounds) {
-        winner = 1;
-    } else {
-        winner = 2;
-    }
     document.querySelector(".end_game").classList.remove("hidden");
     document.querySelector(".end_game").addEventListener("click", function(){
-        document.querySelector(".game_play").classList.add("hidden");
-        document.querySelector(".winner").classList.remove("hidden");
+    document.querySelector(".game_play").classList.add("hidden");
+    document.querySelector(".winner").classList.remove("hidden");
+        if (one_rounds == two_rounds){
+            document.querySelector(".winner").textContent = `It is a tie!!!!`
+        }else{
+            if (one_rounds > two_rounds) {
+                winner = 1;
+            } else{
+                winner = 2;
+        }
         document.querySelector(".winner").textContent = `The winner is... Player ${winner}!!!`
+        }
     })
 }
