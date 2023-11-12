@@ -8,7 +8,6 @@ let rollDie = () => {
 // decide how many rounds to play
 document.querySelector(".start_submit").addEventListener("click", function() {
     if (document.getElementById('round_num').value % 2 == 1) {
-        console.log("start")
         total_rounds = parseInt(document.getElementById('round_num').value);
         document.querySelector(".start_page").classList.add("hidden");
         document.querySelector(".not_odd").classList.add("hidden");
@@ -49,7 +48,6 @@ document.querySelector(".first_dice").addEventListener("click", first_dice);
 
 // decide who goes first
 function first_dice() {
-    console.log("...run")
     player_one = rollDie();
     document.querySelector(".one_dice").textContent = `Player 1: ${player_one}`;
     player_two = rollDie();
@@ -59,7 +57,6 @@ function first_dice() {
         document.querySelector(".first_dice").classList.add("hidden");
         document.querySelector(".play").classList.remove("hidden");
         current_player = original_player = 1;
-        console.log("current player is 1")
     } else if (player_one == player_two) {
         document.querySelector(".first_player").textContent = "Tie! Roll again."
     } else {
@@ -67,7 +64,6 @@ function first_dice() {
         document.querySelector(".first_dice").classList.add("hidden");
         document.querySelector(".play").classList.remove("hidden");
         current_player = original_player = 2;
-        console.log("current player is two")
     }
 }
 
@@ -81,15 +77,12 @@ document.querySelector(".play").addEventListener("click", function() {
     document.querySelector(".two_score").textContent = `Player Two Score: ${two_score}`
     document.querySelector(".two_rounds").textContent = `Player Two Rounds Won: ${two_rounds}`
     document.querySelector(".current_player").textContent = `Current Player: ${current_player}`
-    console.log(document.querySelector(".game_play").classList)
     player_turn();
     current_round = 1;
-    //end_turn();
     document.querySelector(".total_rounds").textContent = `Total Rounds: ${total_rounds}`;
 })
 
 function first_roll(){
-    console.log("first")
         roll1 = rollDie();
         roll2 = rollDie();
         roll3 = rollDie();
@@ -107,7 +100,6 @@ function first_roll(){
 }
 
 function second_roll(){
-    console.log("second")
         roll1 = rollDie();
         roll2 = rollDie();
         rolls = [roll1, roll2];
@@ -138,10 +130,7 @@ function third_roll() {
     }
 
 function player_turn() {
-    console.log("player turn");
     // first roll
-    playing = true;
-    //while(playing == true){
     document.querySelector(".first_roll").classList.remove("hidden");
     document.querySelector(".first_roll").addEventListener("click", first_roll)
 
@@ -151,16 +140,10 @@ function player_turn() {
     // last roll
     document.querySelector(".last_roll").addEventListener("click", third_roll)
 }
-//}
 
 function end_turn() {
-    console.log("end turn");
-    /*let end_turn = document.createElement("button")
-    end_turn.textContent="End Turn"
-    document.querySelector(".game_play").insertBefore(end_turn,document.querySelector(".dice_nums").nextSibling)*/
     document.querySelector(".end_turn").classList.remove("hidden");
     document.querySelector(".end_turn").addEventListener("click", end_turn_helper)
-    //end_turn.addEventListener("click",end_turn_helper)
 }
 
 function end_turn_helper(){
@@ -169,7 +152,6 @@ if (current_player == 1) {
         } else {
             current_player = 1;
         }
-        console.log("...what")
         document.querySelector(".current_player").textContent = `Current Player: ${current_player}`
         document.querySelector(".dice_nums").textContent = `Roll Results: N/A`;
         document.querySelector(".end_turn").classList.add("hidden");
@@ -177,26 +159,12 @@ if (current_player == 1) {
         if(current_player==original_player){
             end_round()
         }
-        //document.querySelector(".end_turn").removeEventListener("click", end_turn_helper())
-}
-
-function round(){
-// round loop
-for (current_round = 1; current_round <= total_rounds; current_round++) {
-    console.log("while loop");
-    console.log(document.querySelector(".game_play").classList)
-    player_turn();
-    /*end_turn();
-    player_turn();*/
-}
 }
 
 function end_round(){
-    console.log("help!!")
     document.querySelector(".end_round").classList.remove("hidden");
     document.querySelector(".first_roll").classList.add("hidden");
     document.querySelector(".end_round").addEventListener("click", function() {
-        console.log(one_score)
         if (one_score > two_score) {
             one_rounds++;
             document.querySelector(".one_rounds").textContent = `Player One Rounds Won: ${one_rounds}`
@@ -220,9 +188,6 @@ function end_round(){
 }
 
 function end(){
-// winner page
-//if (current_round > total_rounds) {
-    console.log("end")
     if (one_rounds > two_rounds) {
         winner = 1;
     } else {
