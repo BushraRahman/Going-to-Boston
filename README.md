@@ -20,3 +20,7 @@ In each round, each player throws three dice, then two dice, and then one die. T
 The player with the highest score wins the round, and then the scores are reset for the following round. If there is a tie between the two players' scores for a round, no one wins the round.  
   
 The player with the highest number of rounds won wins the game. If each player won an equal number of rounds, it is a tie.
+
+
+https://github.com/user-attachments/assets/2af42397-28ec-4e06-aa2e-688a486ad4cf
+
