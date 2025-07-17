@@ -86,7 +86,7 @@ function first_roll(){
         roll1 = rollDie();
         roll2 = rollDie();
         roll3 = rollDie();
-        rolls = [roll1, roll2, roll3];
+        rolls = [roll1, " "+roll2, " "+roll3];
         if (current_player == 1) {
             one_score += Math.max(roll1, roll2, roll3);
             document.querySelector(".one_score").textContent = `Player One Score: ${one_score}`;
@@ -104,7 +104,7 @@ function second_roll(){
         roll2 = rollDie();
         rolls = [roll1, roll2];
         if (current_player == 1) {
-            one_score += Math.max(roll1, roll2);
+            one_score += Math.max(roll1, " "+roll2);
             document.querySelector(".one_score").textContent = `Player One Score: ${one_score}`;
         } else {
             two_score += Math.max(roll1, roll2);
