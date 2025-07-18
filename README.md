@@ -8,7 +8,7 @@
 - HuiWenWeng
 - BushraRahman
 
-This project simulates the dice game "Going to Boston" using simple JavaScript and HTML.  
+This project simulates the dice game "Going to Boston" using simple JavaScript and HTML. It can be played [`here`](going-to-boston.vercel.app).
 
 **GAMEPLAY:**  
 There are two players and an odd number of rounds.
